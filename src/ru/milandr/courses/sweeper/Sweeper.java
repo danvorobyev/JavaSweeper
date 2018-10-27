@@ -37,9 +37,9 @@ public class Sweeper extends Application {
     private long openedTiles = 0;
     private long flagsAvailable = 0;
 
-    private Image flag = new Image("/ru.milandr.courses/sweeper/ilya.jpg");
-    private Image mine = new Image("/ru.milandr.courses/sweeper/mine.png");
-    private Image mineCrossed = new Image("/ru.milandr.courses/sweeper/notamine.png");
+    private Image flag = new Image("/ru/milandr/courses/sweeper/ilya.jpg");
+    private Image mine = new Image("/ru/milandr/courses/sweeper/mine.png");
+    private Image mineCrossed = new Image("/ru/milandr/courses/sweeper/notamine.png");
 
     private Text flags = new Text();
     private Text info = new Text();
