@@ -2,6 +2,7 @@ package ru.milandr.courses.sweeper;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -37,7 +38,7 @@ public class Sweeper extends Application {
     private long openedTiles = 0;
     private long flagsAvailable = 0;
 
-    private Image flag = new Image("/ru/milandr/courses/sweeper/ilya.jpg");
+    private Image flag = new Image("/ru/milandr/courses/sweeper/ali.png");
     private Image mine = new Image("/ru/milandr/courses/sweeper/mine.png");
     private Image mineCrossed = new Image("/ru/milandr/courses/sweeper/notamine.png");
 
@@ -46,11 +47,12 @@ public class Sweeper extends Application {
 
 
     private Parent createContent() {
+
         allBombs = 0;
         openedTiles = 0;
         flagsAvailable = 0;
-        int WIDTH = xTiles * tileSize;
-        int HEIGHT = yTiles * tileSize;
+        int width = xTiles * tileSize;
+        int height = yTiles * tileSize;
 
         Pane root = new Pane();
 
@@ -62,39 +64,34 @@ public class Sweeper extends Application {
             scene.setRoot(createContent());
         });
 
-        MenuItem level2 = new MenuItem("Бывалый");
-        level2.setOnAction(event -> {
-            tileSize = 60;
-            xTiles = 15;
-            yTiles = 12;
-            scene.setRoot(createContent());
-        });
 
-        MenuItem level3 = new MenuItem("Эксперт");
-        level3.setOnAction(event -> {
+        MenuItem level2 = new MenuItem("Эксперт");
+        level2.setOnAction(event -> {
             tileSize = 40;
             xTiles = 20;
             yTiles = 16;
             scene.setRoot(createContent());
         });
 
-        MenuItem quit = new MenuItem("Quit");
-        quit.setOnAction(event -> Platform.exit());
-
-        MenuItem restart = new MenuItem("Restart");
-        restart.setOnAction(event -> scene.setRoot(createContent()));
-
-
-        MenuButton menuButton = new MenuButton("Меню", null, level1, level2, level3, restart, quit);
-
+        MenuButton menuButton = new MenuButton("Уровень сложности", null, level1, level2);
         menuButton.setTranslateX(100);
         menuButton.setTranslateY(TAB_HEIGHT * 0.2);
 
-        root.setPrefSize(WIDTH, HEIGHT + TAB_HEIGHT);
-        Rectangle tab = new Rectangle(WIDTH, TAB_HEIGHT);
+        Button quit = new Button("Quit");
+        quit.setTranslateX(width * 0.93);
+        quit.setTranslateY(TAB_HEIGHT * 0.2);
+        quit.setOnAction(event -> Platform.exit());
+
+        Button restart = new Button("Restart");
+        restart.setTranslateX(width * 0.36);
+        restart.setTranslateY(TAB_HEIGHT * 0.2);
+        restart.setOnAction(event -> scene.setRoot(createContent()));
+
+        root.setPrefSize(width, height + TAB_HEIGHT);
+        Rectangle tab = new Rectangle(width, TAB_HEIGHT);
         tab.setStroke(Color.DARKGRAY);
         tab.setFill(Color.DARKGREY);
-        root.getChildren().addAll(tab, menuButton);
+        root.getChildren().addAll(tab, menuButton, quit, restart);
 
 
         for (int y = 0; y < yTiles; y++) {
@@ -128,7 +125,7 @@ public class Sweeper extends Application {
         flags.setVisible(true);
 
         info.setFont(Font.font(30));
-        info.setTranslateX(WIDTH * 0.5);
+        info.setTranslateX(width * 0.5);
         info.setTranslateY(TAB_HEIGHT * 0.7);
         info.setText("");
         info.setVisible(true);
