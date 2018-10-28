@@ -12,12 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -306,6 +309,13 @@ public class Sweeper extends Application {
 
     @Override
     public void start(Stage stage) {
+        String file = "src/ru/milandr/courses/sweeper/blin.mp3";
+        Media sound = new Media(new File(file).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
+
         scene = new Scene(createContent());
         stage.setScene(scene);
         stage.show();
